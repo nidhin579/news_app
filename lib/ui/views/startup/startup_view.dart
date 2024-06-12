@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:news_app_nidhin/constants/env/colors.dart';
 import 'package:stacked/stacked.dart';
-import 'package:news_app_nidhin/ui/common/ui_helpers.dart';
 
 import 'startup_viewmodel.dart';
 
@@ -15,6 +15,7 @@ class StartupView extends StackedView<StartupViewModel> {
     Widget? child,
   ) {
     return const Scaffold(
+      backgroundColor: AppColors.cornflowerRed,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -24,23 +25,18 @@ class StartupView extends StackedView<StartupViewModel> {
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.w900,
+                color: AppColors.white,
               ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Loading ...', style: TextStyle(fontSize: 16)),
-                horizontalSpaceSmall,
-                SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    color: Colors.black,
-                    strokeWidth: 6,
-                  ),
-                )
-              ],
-            ),
+            SizedBox(height: 30),
+            SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(
+                color: AppColors.white,
+                strokeWidth: 6,
+              ),
+            )
           ],
         ),
       ),
