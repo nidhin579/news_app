@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_nidhin/constants/env/colors.dart';
 import 'package:news_app_nidhin/models/article.dart';
 import 'package:stacked/stacked.dart';
-
-import 'news_detail_viewmodel.dart';
+import 'package:news_app_nidhin/ui/views/news_detail/news_detail_viewmodel.dart';
+import 'package:news_app_nidhin/ui/views/news_detail/news_details_view_body.dart';
 
 class NewsDetailView extends StackedView<NewsDetailViewModel> {
   const NewsDetailView({
@@ -17,11 +18,9 @@ class NewsDetailView extends StackedView<NewsDetailViewModel> {
     NewsDetailViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-      ),
+    return const Scaffold(
+      backgroundColor: AppColors.white,
+      body: NewsDetailsViewBody(),
     );
   }
 

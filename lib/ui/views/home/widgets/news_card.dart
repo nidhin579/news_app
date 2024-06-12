@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app_nidhin/constants/env/colors.dart';
 import 'package:news_app_nidhin/models/article.dart';
+import 'package:news_app_nidhin/ui/widgets/app_network_image.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({
@@ -31,18 +31,7 @@ class NewsCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: CachedNetworkImage(
-                imageUrl: article.urlToImage ?? '',
-                height: 100,
-                width: double.infinity,
-                errorWidget: (context, _, __) {
-                  return Image.asset(
-                    'assets/images/error_image.jpg',
-                    fit: BoxFit.cover,
-                  );
-                },
-                fit: BoxFit.cover,
-              ),
+              child: AppNetworkImage(url: article.urlToImage),
             ),
             const SizedBox(height: 12),
             Text(

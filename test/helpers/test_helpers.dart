@@ -4,6 +4,7 @@ import 'package:news_app_nidhin/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:news_app_nidhin/services/news_service.dart';
 import 'package:news_app_nidhin/services/http_service.dart';
+import 'package:news_app_nidhin/services/url_launcher_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -14,6 +15,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<NewsService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<HttpService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<UrlLauncherService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -22,6 +24,7 @@ void registerServices() {
   getAndRegisterDialogService();
   getAndRegisterNewsService();
   getAndRegisterHttpService();
+  getAndRegisterUrlLauncherService();
 // @stacked-mock-register
 }
 
@@ -86,6 +89,13 @@ MockHttpService getAndRegisterHttpService() {
   _removeRegistrationIfExists<HttpService>();
   final service = MockHttpService();
   locator.registerSingleton<HttpService>(service);
+  return service;
+}
+
+MockUrlLauncherService getAndRegisterUrlLauncherService() {
+  _removeRegistrationIfExists<UrlLauncherService>();
+  final service = MockUrlLauncherService();
+  locator.registerSingleton<UrlLauncherService>(service);
   return service;
 }
 // @stacked-mock-create

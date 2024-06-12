@@ -15,6 +15,7 @@ import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/http_service.dart';
 import '../services/news_service.dart';
+import '../services/url_launcher_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -33,4 +34,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => NewsService());
   locator.registerLazySingleton(() => HttpService(httpClient: Client()));
   locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton(() => UrlLauncherService());
 }

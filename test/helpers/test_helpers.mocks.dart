@@ -13,6 +13,7 @@ import 'package:news_app_nidhin/enums/news_category.dart' as _i9;
 import 'package:news_app_nidhin/models/article.dart' as _i10;
 import 'package:news_app_nidhin/services/http_service.dart' as _i2;
 import 'package:news_app_nidhin/services/news_service.dart' as _i8;
+import 'package:news_app_nidhin/services/url_launcher_service.dart' as _i11;
 import 'package:stacked_services/stacked_services.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -793,3 +794,9 @@ class MockHttpService extends _i1.Mock implements _i2.HttpService {
         returnValueForMissingStub: _i6.Future<dynamic>.value(),
       ) as _i6.Future<dynamic>);
 }
+
+/// A class which mocks [UrlLauncherService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUrlLauncherService extends _i1.Mock
+    implements _i11.UrlLauncherService {}
