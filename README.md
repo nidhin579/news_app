@@ -23,8 +23,7 @@ The application is capable of:
 ### Demo
 
 - Demo:
-
-The Demo video includes an Android emulator and an iOS simulator.
+https://youtube.com/shorts/FqfPHSzbcts
 
 
 
