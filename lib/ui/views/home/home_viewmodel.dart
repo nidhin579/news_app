@@ -12,7 +12,7 @@ class HomeViewModel extends FutureViewModel {
   final NavigationService navigationService = locator<NavigationService>();
 
   @override
-  Future futureToRun() => fetchNews();
+  Future futureToRun() => fetchNews(isNew: true);
 
   NewsCategory get currentCategory => newsService.currentCategory;
 
@@ -35,9 +35,11 @@ class HomeViewModel extends FutureViewModel {
     notifyListeners();
   }
 
-  Future<void> fetchNews() async {
+  Future<void> fetchNews({bool isNew = false}) async {
     try {
-      final List<Article> articles = await newsService.fetchNews();
+      final List<Article> articles = await newsService.fetchNews(isNew: isNew);
+      if (isNew) this.articles.clear();
+
       addArticles(articles);
     } catch (e) {
       snackBarService.showSnackbar(

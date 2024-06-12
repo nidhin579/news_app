@@ -22,7 +22,11 @@ class NewsService {
     loadedAllArticles = false;
   }
 
-  Future<List<Article>> fetchNews() async {
+  Future<List<Article>> fetchNews({bool isNew = false}) async {
+    if (isNew) {
+      currentPage = 1;
+      loadedAllArticles = false;
+    }
     final responseJson = await httpService.get(
       endpoint: '/v2/top-headlines',
       params: {

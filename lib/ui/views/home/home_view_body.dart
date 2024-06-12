@@ -56,33 +56,48 @@ class HomeViewBody extends ViewModelWidget<HomeViewModel> {
                       ? const Center(
                           child: CircularProgressIndicator(),
                         )
-                      : NotificationListener<ScrollNotification>(
-                          onNotification: (notification) {
-                            if (notification is ScrollEndNotification &&
-                                notification.metrics.extentAfter == 0 &&
-                                !viewModel.isBusy) {
-                              // User has reached the end of the list
-                              // Load more data or trigger pagination in flutter
-                              viewModel.fetchMoreNews();
-                            }
-                            return false;
-                          },
-                          child: ListView.separated(
-                              separatorBuilder: (context, index) {
-                                return const SizedBox(height: 10);
+                      : viewModel.isArticlesEmpty
+                          ? const Center(
+                              child: Text(
+                              'Nothing to show here!',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ))
+                          : RefreshIndicator(
+                              onRefresh: () async {
+                                viewModel.initialise();
                               },
-                              itemCount: viewModel.articles.length,
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () =>
-                                      viewModel.navigateToNewsDescription(
-                                          viewModel.articles[index]),
-                                  child: NewsCard(
-                                      article: viewModel.articles[index]),
-                                );
-                              }),
-                        ),
+                              child: NotificationListener<ScrollNotification>(
+                                onNotification: (notification) {
+                                  if (notification is ScrollEndNotification &&
+                                      notification.metrics.extentAfter == 0 &&
+                                      !viewModel.isBusy) {
+                                    // User has reached the end of the list
+                                    // Load more data or trigger pagination in flutter
+                                    viewModel.fetchMoreNews();
+                                  }
+                                  return false;
+                                },
+                                child: ListView.separated(
+                                    separatorBuilder: (context, index) {
+                                      return const SizedBox(height: 10);
+                                    },
+                                    itemCount: viewModel.articles.length,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                        onTap: () =>
+                                            viewModel.navigateToNewsDescription(
+                                                viewModel.articles[index]),
+                                        child: NewsCard(
+                                            article: viewModel.articles[index]),
+                                      );
+                                    }),
+                              ),
+                            ),
                 ),
                 if (viewModel.isBusy && !viewModel.isArticlesEmpty)
                   const Padding(

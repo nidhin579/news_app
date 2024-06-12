@@ -17,6 +17,7 @@ class AppNetworkImage extends StatelessWidget {
       'assets/images/error_image.jpg',
       fit: BoxFit.cover,
       height: height,
+      width: double.infinity,
     );
     return url != null
         ? CachedNetworkImage(
