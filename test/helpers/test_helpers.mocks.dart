@@ -737,8 +737,8 @@ class MockNewsService extends _i1.Mock implements _i8.NewsService {
   @override
   _i9.NewsCategory get currentCategory => (super.noSuchMethod(
         Invocation.getter(#currentCategory),
-        returnValue: _i9.NewsCategory.business,
-        returnValueForMissingStub: _i9.NewsCategory.business,
+        returnValue: _i9.NewsCategory.general,
+        returnValueForMissingStub: _i9.NewsCategory.general,
       ) as _i9.NewsCategory);
 
   @override

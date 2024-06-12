@@ -1,7 +1,7 @@
 enum NewsCategory {
+  general,
   business,
   entertainment,
-  general,
   health,
   science,
   sports,

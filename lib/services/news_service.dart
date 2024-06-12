@@ -7,10 +7,10 @@ import 'package:news_app_nidhin/services/http_service.dart';
 class NewsService {
   final HttpService httpService = locator<HttpService>();
 
-  static const String _countryCode = 'pt';
+  static const String _countryCode = 'us';
 
-  static const int _pageSize = 10;
-  int currentPage = 0;
+  static const int _pageSize = 6;
+  int currentPage = 1;
   bool loadedAllArticles = false;
 
   NewsCategory currentCategory = NewsCategory.general;
@@ -18,7 +18,7 @@ class NewsService {
   void switchCategory(NewsCategory category) {
     currentCategory = category;
     // Current page defaults to zero when category changes
-    currentPage = 0;
+    currentPage = 1;
     loadedAllArticles = false;
   }
 
@@ -34,7 +34,7 @@ class NewsService {
     );
 
     final HeadlinesResponse response = HeadlinesResponse.fromJson(responseJson);
-    if (response.totalResults == _pageSize) {
+    if (response.totalResults > 0) {
       currentPage++;
     } else {
       loadedAllArticles = true;

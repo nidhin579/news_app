@@ -6,13 +6,15 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:news_app_nidhin/services/news_service.dart';
 import 'package:news_app_nidhin/services/http_service.dart';
+import 'package:news_app_nidhin/ui/views/news_detail/news_detail_view.dart';
 // @stacked-import
 
 @StackedApp(
   routes: [
     MaterialRoute(page: HomeView),
     MaterialRoute(page: StartupView),
-    // @stacked-route
+    MaterialRoute(page: NewsDetailView),
+// @stacked-route
   ],
   dependencies: [
     LazySingleton(classType: BottomSheetService),
