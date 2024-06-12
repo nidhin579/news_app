@@ -761,10 +761,12 @@ class MockNewsService extends _i1.Mock implements _i8.NewsService {
       );
 
   @override
-  _i6.Future<List<_i10.Article>> fetchNews() => (super.noSuchMethod(
+  _i6.Future<List<_i10.Article>> fetchNews({bool? isNew = false}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #fetchNews,
           [],
+          {#isNew: isNew},
         ),
         returnValue: _i6.Future<List<_i10.Article>>.value(<_i10.Article>[]),
         returnValueForMissingStub:
@@ -799,4 +801,14 @@ class MockHttpService extends _i1.Mock implements _i2.HttpService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUrlLauncherService extends _i1.Mock
-    implements _i11.UrlLauncherService {}
+    implements _i11.UrlLauncherService {
+  @override
+  _i6.Future<void> launch(Uri? url) => (super.noSuchMethod(
+        Invocation.method(
+          #launch,
+          [url],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+}
