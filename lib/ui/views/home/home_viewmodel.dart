@@ -1,36 +1,51 @@
-import 'package:news_app_nidhin/app/app.bottomsheets.dart';
-import 'package:news_app_nidhin/app/app.dialogs.dart';
 import 'package:news_app_nidhin/app/app.locator.dart';
-import 'package:news_app_nidhin/ui/common/app_strings.dart';
+import 'package:news_app_nidhin/enums/news_category.dart';
+import 'package:news_app_nidhin/models/article.dart';
+import 'package:news_app_nidhin/services/news_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+class HomeViewModel extends FutureViewModel {
+  final NewsService newsService = locator<NewsService>();
+  final SnackbarService snackBarService = locator<SnackbarService>();
 
-  String get counterLabel => 'Counter is: $_counter';
+  @override
+  Future futureToRun() => fetchNews();
 
-  int _counter = 0;
+  NewsCategory get currentCategory => newsService.currentCategory;
 
-  void incrementCounter() {
-    _counter++;
-    rebuildUi();
+  List<Article> articles = [];
+
+  void switchCategory(NewsCategory category) {
+    if (currentCategory != category) {
+      newsService.switchCategory(category);
+      articles.clear();
+      notifyListeners();
+
+      initialise();
+    }
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Stacked Rocks!',
-      description: 'Give stacked $_counter stars on Github',
-    );
+  void addArticles(List<Article> articles) {
+    this.articles.addAll(articles);
+    notifyListeners();
   }
 
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
-    );
+  Future<void> fetchNews() async {
+    try {
+      final List<Article> articles = await newsService.fetchNews();
+      print(articles.length);
+      addArticles(articles);
+    } catch (e) {
+      print(e);
+      snackBarService.showSnackbar(
+          message: 'Failed to fetch news! Please try again.');
+    }
+  }
+
+  Future<void> fetchMoreNews() async {
+    setBusy(true);
+    await fetchNews();
+    setBusy(false);
   }
 }
